@@ -5,28 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>情緒魔法寶庫 Emotional Magic</title>
   <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      background: url('images/首頁背景含人物_大圖.png') no-repeat center top;
+      background-size: cover;
+    }
+    .scroll-background {
+      padding: 80px 20px 40px;
+      text-align: center;
+    }
+    .scroll-content {
+      background: rgba(255, 255, 255, 0.8);
+      border: 5px solid #d6b77a;
+      border-radius: 16px;
+      padding: 30px;
+      display: inline-block;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+    .scroll-content h1 {
+      font-size: 2rem;
+      color: #333;
+    }
+    .scroll-content button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #f4c74f;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    #quiz-container img.top-banner {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    #quiz-container {
+      text-align: center;
+      padding: 20px;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-  <div class="hero-section">
-    <div class="scroll-background">
-      <div class="scroll-content">
-        <h1>✨情緒魔法寶庫 <span class="highlight">Emotional</span> Magic✨</h1>
-        <p>開啟你的情緒魔法之旅吧！</p>
-        <button onclick="startQuiz()">展開卷軸，開始探險</button>
-      </div>
+  <div id="start-container" class="scroll-background">
+    <div class="scroll-content">
+      <h1>✨情緒魔法寶庫 Emotional<span style="color: #f7943d">(情感)</span> Magic✨</h1>
+      <p>開啟你的情緒魔法之旅吧！</p>
+      <button onclick="startQuiz()">展開卷軸，開始探險</button>
     </div>
-    <img class="wizard-foreground" src="images/合照去背1_OK.png" alt="魔法師合照">
   </div>
 
   <div id="quiz-container" class="hidden">
-    <img class="quiz-top-banner" src="images/情緒麻要法寶庫-封面合照-大圖.png" alt="合照大圖">
-    <!-- 題目會透過 JS 注入 -->
+    <img src="images/合照有景_大圖1.png" alt="合照" class="top-banner">
+    <!-- 題目內容將透過 JavaScript 動態插入 -->
   </div>
-
   <div id="result-container" class="hidden"></div>
 
   <script src="js/scripts.js"></script>
 </body>
-
-
 </html>
