@@ -7,21 +7,21 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <!-- 首頁背景與開場 -->
+  <!-- 首頁區塊 -->
   <div class="homepage">
     <img src="images/首頁背景含人物_大圖.png" alt="背景圖" class="bg-full">
-    <img src="images/情緒魔法寶庫心測（標題＆開場語）.png" alt="開場圖示" class="title-image fade-loop" onclick="startQuiz()" />
+    <img src="images/情緒魔法寶庫心測（標題＆開場語）.png" alt="標題開場圖" class="title-overlay fade-loop" onclick="startQuiz()">
   </div>
 
-  <!-- 測驗區域 -->
+  <!-- 題目區塊 -->
   <div id="quiz-section" class="hidden">
-    <img src="images/合照有景_大圖1.png" alt="合照圖片" class="quiz-banner" />
+    <img src="images/合照有景_大圖1.png" alt="橫幅合照圖" class="quiz-banner">
     <div id="quiz-container"></div>
     <div id="result-container" class="hidden"></div>
   </div>
 
   <script>
-    const questions = Array(13).fill("🤔 當你心情不好時，你通常會做些什麼呢？（複選：最少1項，最多5項）");
+    const questions = Array(13).fill("🤔 當你心情不好時，你通常會做些什麼呢？");
 
     const optionsPerPage = [
       ["🌬️ 深呼吸 / 從1數到10","🍰 吃喜歡的食物","😷 表達身體不舒服","⏸️ 休息一下 / 暫停一下","🎧 聆聽他人的建議","🤐 不說出自己的想法和感受","🛌 什麼都不做 / 一直睡（擺爛）","✖️以上的方式我都很少用"],
@@ -53,7 +53,7 @@
       const options = optionsPerPage[currentQuestion];
       container.innerHTML = `
         <div class="question-box">
-          <h2>第 ${currentQuestion + 1} 頁｜${questions[currentQuestion]}</h2>
+          <h2>${questions[currentQuestion]} <span class="note">(複選：最少1項，最多5項)</span></h2>
           <form id="question-form">
             ${options.map((opt, i) => `
               <label class="option-item">
