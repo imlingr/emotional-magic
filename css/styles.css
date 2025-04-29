@@ -161,7 +161,7 @@ button:hover {
 }
 
 .fade-loop {
-  animation: flash 2s ease-in-out infinite;
+  animation: flash 2s ease-in infinite;
 }
 
 @keyframes flash {
