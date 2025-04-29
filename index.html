@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>情緒魔法寶庫 Emotional Magic</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
   <div class="hero-section">
     <div class="scroll-background">
       <div class="scroll-content">
-        <h1>✨情緒魔法寶庫 <span class="highlight">Emotional</span>(情感) Magic✨</h1>
+        <h1>✨情緒魔法寶庫 <span class="highlight">Emotional</span> Magic✨</h1>
         <p>開啟你的情緒魔法之旅吧！</p>
         <button onclick="startQuiz()">展開卷軸，開始探險</button>
       </div>
@@ -18,7 +18,7 @@
   </div>
 
   <div id="quiz-section" class="hidden">
-    <img src="images/合照有景_大圖1.png" alt="合照圖片" class="quiz-banner">
+    <img src="images/合照有景_大圖1.png" alt="合照圖片" class="quiz-banner" />
     <div id="quiz-container"></div>
     <div id="result-container" class="hidden"></div>
   </div>
@@ -41,6 +41,70 @@
       ["📝 把想法及心情寫下來","💼 更努力去做 / 去學","✊ 握拳 / 瞪人","📵 暫時關掉手機","👩‍⚕️ 找專業的人幫忙（看醫生、服藥）","😒 認為別人不會了解自己的痛苦","🗣️ 罵人 / 嗆聲","✖️以上的方式我都很少用"],
       ["🔍 尋找解決或改善問題的方法","🦸‍♀️ 正面對決（面對它、處理它）","🚪 甩門離開","🤝 退出吵架中的群組","🧑‍⚕️ 找專業的人幫忙（專輔老師 / 心理師 / 社工師…）","😠 覺得都是別人的錯 / 別人害的","👊 打人 / 教訓對方","✖️以上的方式我都很少用"]
     ];
+
+    let currentQuestion = 0;
+    const scores = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0 };
+
+    function startQuiz() {
+      document.querySelector(".hero-section").classList.add("hidden");
+      document.getElementById("quiz-section").classList.remove("hidden");
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const container = document.getElementById("quiz-container");
+      const options = optionsPerPage[currentQuestion];
+
+      container.innerHTML = `
+        <div class="question-box">
+          <h2>第 ${currentQuestion + 1} 頁｜${questions[currentQuestion]}</h2>
+          <form id="question-form">
+            ${options.map((opt, i) => `
+              <label class="option-item">
+                <input type="checkbox" name="option" value="${String.fromCharCode(65 + i)}"> ${opt}
+              </label>
+            `).join('')}
+          </form>
+          <button onclick="nextQuestion()">下一頁</button>
+        </div>
+      `;
+    }
+
+    function nextQuestion() {
+      const form = document.getElementById("question-form");
+      const checked = [...form.elements["option"]].filter(input => input.checked);
+      if (checked.length < 1 || checked.length > 5) {
+        alert("請至少選1項，最多選5項！");
+        return;
+      }
+      checked.forEach(choice => {
+        if (choice.value !== 'H') scores[choice.value]++;
+      });
+
+      currentQuestion++;
+      if (currentQuestion >= questions.length) {
+        showResult();
+      } else {
+        loadQuestion();
+      }
+    }
+
+    function showResult() {
+      document.getElementById("quiz-container").classList.add("hidden");
+      const result = document.getElementById("result-container");
+      result.classList.remove("hidden");
+
+      const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+      const [top1, top2] = [sorted[0][0], sorted[1][0]];
+
+      result.innerHTML = `
+        <div class="result-box">
+          <h2>✨恭喜你完成了情緒魔法寶庫探索✨</h2>
+          <p>你最常使用的情緒魔法是：「${top1}」與「${top2}」</p>
+          <p>🎀別忘了寫下你的感受，或給魔法寶庫守護者回信喔！</p>
+        </div>
+      `;
+    }
   </script>
 </body>
 </html>
