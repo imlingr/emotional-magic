@@ -100,4 +100,35 @@ button:hover {
   max-height: 80%;
   object-fit: contain;
 }
+/* 將 hero 區整合背景 + 人物圖 */
+.hero-section {
+  position: relative;
+  background-image: url("../images/中古歐洲背景.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: top center;
+  padding-top: 80px;
+  padding-bottom: 120px;
+}
+
+/* 卷軸方框保持置中但浮在背景上 */
+.scroll-background {
+  background: rgba(255, 255, 255, 0.85); /* 半透明白底 */
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin: 0 auto;
+  max-width: 800px;
+  text-align: center;
+}
+
+/* 角色大合照 */
+.wizard-group {
+  display: block;
+  max-width: 80%;
+  height: auto;
+  margin: 30px auto 0;
+  z-index: 2;
+  position: relative;
+}
 
