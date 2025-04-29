@@ -85,10 +85,10 @@ button:hover {
 .castle-scene {
   position: relative;
   background-image: url("../images/中古歐洲背景.png");
-  background-size: cover;
+  background-size: contain;
   background-position: center bottom;
   background-repeat: no-repeat;
-  height: 480px; /* 可依需要調整高度 */
+  height: 600px; /* 可依需要調整高度 */
   margin-top: 30px;
 }
 
@@ -97,7 +97,7 @@ button:hover {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  max-height: 90%;
+  max-height: 80%;
   object-fit: contain;
 }
 
