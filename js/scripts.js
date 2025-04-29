@@ -1,5 +1,5 @@
 function startQuiz() {
-  document.querySelector('.container').classList.add('hidden');
+  document.querySelector('.scroll-background').classList.add('hidden');
   document.getElementById('quiz-container').classList.remove('hidden');
   loadQuestions();
 }
