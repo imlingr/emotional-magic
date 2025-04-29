@@ -1,0 +1,72 @@
+body {
+  font-family: "Noto Sans TC", sans-serif;
+  background-color: #fff9f0;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: #333;
+}
+
+.container {
+  padding: 50px 20px;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #ffd93d;
+  color: #fff;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #ffc300;
+}
+
+.hidden {
+  display: none;
+}
+
+#quiz-container {
+  margin-top: 20px;
+}
+
+#result-container {
+  margin-top: 40px;
+  background-color: #fff3cd;
+  padding: 20px;
+  border-radius: 10px;
+  display: inline-block;
+}
+.scroll-background {
+  background: linear-gradient(to bottom, #f7e6c4 0%, #fff9f0 30%, #fff9f0 70%, #f7e6c4 100%);
+  border: 10px solid #deb887;
+  border-radius: 20px;
+  margin: 40px auto;
+  max-width: 1000px;
+  padding: 40px 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.scroll-content {
+  text-align: center;
+}
+
+.scroll-content h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.scroll-content p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+}
