@@ -7,15 +7,14 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <!-- 首頁區塊 -->
-  <div class="homepage">
-    <img src="images/首頁背景含人物_大圖.png" alt="背景圖" class="bg-full">
-    <img src="images/情緒魔法寶庫心測（標題＆開場語）.png" alt="標題開場圖" class="title-overlay fade-loop" onclick="startQuiz()">
+  <!-- 首頁（點擊整張圖） -->
+  <div class="homepage" onclick="startQuiz()">
+    <img src="images/情緒魔法寶庫完整首頁圖.png" alt="首頁全圖" class="full-cover">
   </div>
 
-  <!-- 題目區塊 -->
+  <!-- 題目區 -->
   <div id="quiz-section" class="hidden">
-    <img src="images/合照有景_大圖1.png" alt="橫幅合照圖" class="quiz-banner">
+    <img src="images/合照有景_大圖1.png" alt="題目上方橫幅圖" class="quiz-banner" />
     <div id="quiz-container"></div>
     <div id="result-container" class="hidden"></div>
   </div>
@@ -53,7 +52,7 @@
       const options = optionsPerPage[currentQuestion];
       container.innerHTML = `
         <div class="question-box">
-          <h2>${questions[currentQuestion]} <span class="note">(複選：最少1項，最多5項)</span></h2>
+          <h2>${questions[currentQuestion]} <span class="note">（複選：最少1項，最多5項）</span></h2>
           <form id="question-form">
             ${options.map((opt, i) => `
               <label class="option-item">
@@ -97,7 +96,7 @@
         <div class="result-box">
           <h2>✨恭喜你完成了情緒魔法寶庫探索✨</h2>
           <p>你最常使用的情緒魔法是：「${top1}」與「${top2}」</p>
-          <p>🎀別忘了寫下你的感受，或給魔法寶庫守護者回信喔！</p>
+          <p>🎀別忘了寫下你的感受，或給守護者回信喔！</p>
         </div>
       `;
     }
