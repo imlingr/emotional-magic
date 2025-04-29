@@ -1,157 +1,75 @@
 body {
-  font-family: "Noto Sans TC", sans-serif;
-  background-color: #fff9f0;
   margin: 0;
-  padding: 0;
+  font-family: 'Noto Sans TC', sans-serif;
+  background-color: #fffaf2;
+  overflow-x: hidden;
+}
+
+.hero {
+  background-image: url('../images/首頁背景含人物_大圖.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   text-align: center;
-  color: #333;
-}
-
-.container {
-  padding: 50px 20px;
-}
-
-h1 {
-  font-size: 2em;
-  margin-bottom: 20px;
-}
-
-button {
-  background-color: #ffd93d;
-  color: #fff;
-  border: none;
-  padding: 15px 30px;
-  font-size: 1.2em;
-  border-radius: 10px;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #ffc300;
-}
-
-.hidden {
-  display: none;
-}
-
-#quiz-container {
-  margin-top: 20px;
-}
-
-#result-container {
-  margin-top: 40px;
-  background-color: #fff3cd;
-  padding: 20px;
-  border-radius: 10px;
-  display: inline-block;
-}
-.scroll-background {
-  background: linear-gradient(to bottom, #f7e6c4 0%, #fff9f0 30%, #fff9f0 70%, #f7e6c4 100%);
-  border: 10px solid #deb887;
-  border-radius: 20px;
-  margin: 40px auto;
-  max-width: 1000px;
-  padding: 40px 20px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  padding: 80px 20px 100px;
 }
 
 .scroll-content {
-  text-align: center;
+  background: linear-gradient(to bottom, #fdf6e9, #f4e7c7);
+  border: 6px solid #d5b883;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 40px 30px;
+  max-width: 700px;
+  width: 90%;
 }
 
-.scroll-content h1 {
-  font-size: 2.5em;
+h1 {
+  font-size: 2.2em;
+  color: #333;
   margin-bottom: 10px;
 }
 
-.scroll-content p {
+p {
   font-size: 1.2em;
+  color: #444;
   margin-bottom: 30px;
 }
-.group-photo {
-  text-align: center;
-  margin-top: 30px;
+
+button {
+  background-color: #f8cb3d;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 30px;
+  font-size: 1.1em;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
 }
 
-.group-photo img {
-  max-width: 90%;
+button:hover {
+  transform: scale(1.05);
+}
+
+.quiz-header-img {
+  width: 100%;
   height: auto;
-  border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-.castle-scene {
-  position: relative;
-  background-image: url("../images/中古歐洲背景.png");
-  background-size: contain;
-  background-position: center bottom;
-  background-repeat: no-repeat;
-  height: 600px; /* 可依需要調整高度 */
-  margin-top: 30px;
-}
-
-.wizard-group {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  max-height: 80%;
-  object-fit: contain;
-}
-body {
-  margin: 0;
-  background-color: #fefaf2;
-  font-family: 'Noto Sans TC', sans-serif;
-}
-
-/* 卷軸頁背景圖 */
-.hero-section {
-  position: relative;
-  background-image: url("../images/中古歐洲背景.png");
-  background-size: cover;
-  background-position: top center;
-  background-repeat: no-repeat;
-  padding-top: 80px;
-  padding-bottom: 60px;
-  text-align: center;
-}
-
-/* 卷軸區域：半透明白底 */
-.scroll-background {
-  background: rgba(255, 255, 255, 0.88);
-  margin: 0 auto;
-  max-width: 820px;
-  padding: 40px 20px;
-  border-radius: 20px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* 合照人物圖 */
-.wizard-foreground {
-  display: block;
-  margin: 40px auto 0;
-  max-width: 95%;
-  height: auto;
-}
-
-/* 心理測驗區上方的大合照圖 */
-.quiz-top-banner {
   display: block;
   margin: 0 auto;
-  max-width: 95%;
-  height: auto;
-  margin-bottom: 20px;
 }
 
-/* 隱藏區域預設 */
+#quiz-section {
+  background-color: #fffaf2;
+  padding-bottom: 50px;
+}
+
 .hidden {
   display: none;
-}
-
-/* 亮點字 */
-.highlight {
-  color: #f38532;
-  font-weight: 700;
 }
