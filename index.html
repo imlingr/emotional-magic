@@ -8,21 +8,25 @@
 </head>
 <body>
   <div class="hero-section">
-  <div class="scroll-background">
-    <div class="scroll-content">
-      <h1>✨情緒魔法寶庫 Emotional Magic✨</h1>
-      <p>開啟你的情緒魔法之旅吧！</p>
-      <button onclick="startQuiz()">展開卷軸，開始探險</button>
+    <div class="scroll-background">
+      <div class="scroll-content">
+        <h1>✨情緒魔法寶庫 <span class="highlight">Emotional</span> Magic✨</h1>
+        <p>開啟你的情緒魔法之旅吧！</p>
+        <button onclick="startQuiz()">展開卷軸，開始探險</button>
+      </div>
     </div>
+    <img class="wizard-foreground" src="images/合照去背1_OK.png" alt="魔法師合照">
   </div>
-  <img class="wizard-group" src="images/合照去背1_OK.png" alt="魔法師合照">
-</div>
 
-<div id="quiz-container" class="hidden"></div>
-<div id="result-container" class="hidden"></div>
+  <div id="quiz-container" class="hidden">
+    <img class="quiz-top-banner" src="images/情緒麻要法寶庫-封面合照-大圖.png" alt="合照大圖">
+    <!-- 題目會透過 JS 注入 -->
+  </div>
 
+  <div id="result-container" class="hidden"></div>
 
   <script src="js/scripts.js"></script>
 </body>
+
 
 </html>
