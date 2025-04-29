@@ -5,67 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>情緒魔法寶庫 Emotional Magic</title>
   <link rel="stylesheet" href="css/styles.css">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Noto Sans TC', sans-serif;
-      background: url('images/首頁背景含人物_大圖.png') no-repeat center top;
-      background-size: cover;
-    }
-    .scroll-background {
-      padding: 80px 20px 40px;
-      text-align: center;
-    }
-    .scroll-content {
-      background: rgba(255, 255, 255, 0.8);
-      border: 5px solid #d6b77a;
-      border-radius: 16px;
-      padding: 30px;
-      display: inline-block;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-    }
-    .scroll-content h1 {
-      font-size: 2rem;
-      color: #333;
-    }
-    .scroll-content button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background-color: #f4c74f;
-      border: none;
-      border-radius: 8px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    #quiz-container img.top-banner {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    #quiz-container {
-      text-align: center;
-      padding: 20px;
-    }
-    .hidden {
-      display: none;
-    }
-  </style>
 </head>
 <body>
-  <div id="start-container" class="scroll-background">
-    <div class="scroll-content">
-      <h1>✨情緒魔法寶庫 Emotional<span style="color: #f7943d">(情感)</span> Magic✨</h1>
-      <p>開啟你的情緒魔法之旅吧！</p>
-      <button onclick="startQuiz()">展開卷軸，開始探險</button>
+  <div class="hero-section">
+    <div class="scroll-background">
+      <div class="scroll-content">
+        <h1>✨情緒魔法寶庫 <span class="highlight">Emotional</span>(情感) Magic✨</h1>
+        <p>開啟你的情緒魔法之旅吧！</p>
+        <button onclick="startQuiz()">展開卷軸，開始探險</button>
+      </div>
     </div>
   </div>
 
-  <div id="quiz-container" class="hidden">
-    <img src="images/合照有景_大圖1.png" alt="合照" class="top-banner">
-    <!-- 題目內容將透過 JavaScript 動態插入 -->
+  <div id="quiz-section" class="hidden">
+    <img src="images/合照有景_大圖1.png" alt="合照圖片" class="quiz-banner">
+    <div id="quiz-container"></div>
+    <div id="result-container" class="hidden"></div>
   </div>
-  <div id="result-container" class="hidden"></div>
 
-  <script src="js/scripts.js"></script>
+  <script>
+    const questions = Array(13).fill("🤔 當你心情不好時，你通常會做些什麼呢？（複選：最少1項，最多5項）");
+
+    const optionsPerPage = [
+      ["🌬️ 深呼吸 / 從1數到10","🍰 吃喜歡的食物","😷 表達身體不舒服","⏸️ 休息一下 / 暫停一下","🎧 聆聽他人的建議","🤐 不說出自己的想法和感受","🛌 什麼都不做 / 一直睡（擺爛）","✖️以上的方式我都很少用"],
+      ["🤔 覺察自己是否受非理性想法影響","🎨 做喜歡的事","😢 哭泣 / 流淚","🕰 等一下再說（冷靜後再處理）","🤔 請教他人怎麼做","🙈 隱藏自己的感受","📱 一直一直打遊戲或滑手機 / 作息大亂","✖️以上的方式我都很少用"],
+      ["🌷 把注意力放在美好的事物上","💆 捏捏抒壓小物","😭 大哭","🛋️ 找個舒服的地方放鬆一會兒","🗨️ 把心情說出來","😏 假裝不在乎","🚪 把自己一直關在房間","✖️以上的方式我都很少用"],
+      ["😄 用幽默看待問題","🎤 唱歌","😡 在心中咒罵對方","🚿 洗個熱水澡","🙏 禱告 / 拜拜 / 祈請靈性力量協助","😓 覺得自己很倒楣","🍔 暴飲暴食 / 不吃不喝","✖️以上的方式我都很少用"],
+      ["🧘 練習正念或冥想","🎸 彈奏樂器","💥 在心中想像痛揍對方","💤 好好睡一覺","🐶 跟寵物玩","💭 忍不住一直想一直想","🛒 瘋狂購物","✖️以上的方式我都很少用"],
+      ["😂 想好笑的事情","🎨 藝術創作（畫畫等）","🖍️ 亂塗亂畫","🕹️ 玩遊戲（計時小玩一下）","🤗 來一個擁抱","🤦 自責懊惱","🏍️ 超速騎車 / 飆車","✖️以上的方式我都很少用"],
+      ["🔄 轉念~轉動想法聚光燈","✍️ 創作（寫文、寫詩、寫歌…）","✂️ 撕紙或剪紙","🎬 看搞笑影片","💬 找好朋友聊一聊","😡 對自己生氣","🚫 做出傷害自己的行為","✖️以上的方式我都很少用"],
+      ["🤝 站在對方的立場想一想","🧹 整理東西或房間","⛺️ 打枕頭或打玩偶","🧵 專心做手作","👫 找信任或喜歡的親友陪伴自己","⏰ 之後再說（拖延或逃避）","🙅‍♀️ 不讀不回 / 不想溝通 / 冷戰","✖️以上的方式我都很少用"],
+      ["💪 對自己說鼓勵或安慰的話","🧽 大掃除或斷捨離","📝 在紙上寫滿三字經","🚶 一個人出去走一走","🚶‍♂️ 與親友到戶外走走","🙇‍♂️ 我就是爛","🗨️ 發限動抱怨或罵對方","✖️以上的方式我都很少用"],
+      ["📓 寫日記","🏃 運動 / 跳舞 / 伸展","😱 找個地方大叫","🗣️ 告知他人自己需要獨處靜一靜","👨‍👩‍👦 向爸媽或照顧者傾訴","🙅 拒絕別人的幫忙","🚮 丟 / 摔 / 打 / 踢東西宣洩","✖️以上的方式我都很少用"],
+      ["📚 閱讀","👍 做好事","😤 告訴對方自己很不爽 / 生氣了","🕰️ 默默等待親友來關心","👨‍🏫 尋求老師或大人的幫助","🙅‍♂️ 認為對方應該看出來自己心情不好","🔨 破壞東西","✖️以上的方式我都很少用"],
+      ["📝 把想法及心情寫下來","💼 更努力去做 / 去學","✊ 握拳 / 瞪人","📵 暫時關掉手機","👩‍⚕️ 找專業的人幫忙（看醫生、服藥）","😒 認為別人不會了解自己的痛苦","🗣️ 罵人 / 嗆聲","✖️以上的方式我都很少用"],
+      ["🔍 尋找解決或改善問題的方法","🦸‍♀️ 正面對決（面對它、處理它）","🚪 甩門離開","🤝 退出吵架中的群組","🧑‍⚕️ 找專業的人幫忙（專輔老師 / 心理師 / 社工師…）","😠 覺得都是別人的錯 / 別人害的","👊 打人 / 教訓對方","✖️以上的方式我都很少用"]
+    ];
+  </script>
 </body>
 </html>
