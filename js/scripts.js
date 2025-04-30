@@ -1,60 +1,110 @@
+let currentPage = 0;
+const scores = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0 };
+const choices = "ABCDEFGH";
+const totalPages = 14;
+
+const questions = Array(13).fill("😮 當你心情不好時，你通常會做些什麼呢？");
+const optionsPerPage = [...]; // ⬅ 請在此貼上前述13頁的選項陣列
+
 function startQuiz() {
-  document.querySelector('.scroll-background').classList.add('hidden');
-  document.getElementById('quiz-container').classList.remove('hidden');
-  loadQuestions();
+  document.querySelector(".homepage").classList.add("hidden");
+  document.getElementById("quiz-section").classList.remove("hidden");
+  currentPage = 0;
+  renderPage();
 }
 
-const questions = [
-  "🤔 當你心情不好時，你通常會做些什麼呢？（複選：最少1項，最多5項）",
-  "😟 面對挫折時，你的第一反應通常是？",
-  "😢 難過時，你會傾向採取哪些行動？",
-  "😡 生氣的時候，你最常做什麼？",
-  "😰 壓力大時，你習慣的紓壓方式是？",
-  "🥺 感覺無助的時候，你的應對行為是？",
-  "😣 當你覺得一切都很煩時，你會？",
-  "😭 感到被誤解時，你通常會？",
-  "😞 心情低落時，你傾向？",
-  "😤 被批評時，你的第一個行為是？",
-  "😶 心情很悶的時候，你的行動？",
-  "😔 情緒崩潰邊緣時，你會？",
-  "😩 極度失望時，你的習慣行為？"
-];
+function renderPage() {
+  const container = document.getElementById("quiz-container");
+  container.innerHTML = "";
 
-let currentQuestion = 0;
+  // 進度條
+  const progressIcon = document.getElementById("progress-icon");
+  const progressWidth = document.querySelector(".progress-bar").offsetWidth - 28;
+  progressIcon.style.left = `${(currentPage / (totalPages - 1)) * progressWidth}px`;
 
-function loadQuestions() {
-  const container = document.getElementById('quiz-container');
-  container.innerHTML = `
-    <h2>${questions[currentQuestion]}</h2>
-    <div>
-      <label><input type="checkbox"> 聯絡朋友傾訴</label><br>
-      <label><input type="checkbox"> 狂吃狂睡或暴玩</label><br>
-      <label><input type="checkbox"> 瘋狂購物/滑手機</label><br>
-      <label><input type="checkbox"> 獨自流淚或發呆</label><br>
-      <label><input type="checkbox"> 尋求老師、心理師協助</label><br>
-      <label><input type="checkbox"> 用寫作、畫畫紓壓</label><br>
-      <label><input type="checkbox"> 大吼大叫、摔東西</label><br>
-      <label><input type="checkbox"> 運動、散步、做家事</label><br>
-    </div>
-    <button onclick="nextQuestion()">下一頁</button>
-  `;
-}
+  if (currentPage < 13) {
+    const question = questions[currentPage];
+    const options = optionsPerPage[currentPage];
+    const wrapper = document.createElement("div");
+    wrapper.className = "question-box";
 
-function nextQuestion() {
-  currentQuestion++;
-  if (currentQuestion >= questions.length) {
-    showResult();
+    wrapper.innerHTML = `
+      <h2>${question}</h2>
+      <span class="note">（複選：最少1項，最多5項）</span>
+    `;
+
+    options.forEach((text, i) => {
+      const label = document.createElement("label");
+      label.className = "option-item";
+      label.innerHTML = `
+        <input type="checkbox" name="opt" value="${choices[i]}" onchange="limitCheck(this)">
+        ${text}
+      `;
+      wrapper.appendChild(label);
+    });
+
+    const btn = document.createElement("button");
+    btn.innerText = "下一頁";
+    btn.onclick = () => handleNext();
+    wrapper.appendChild(btn);
+
+    container.appendChild(wrapper);
   } else {
-    loadQuestions();
+    // 資訊頁
+    container.innerHTML = `
+      <div class="question-box">
+        <h2>💬 在揭曉結果前，請簡單填寫以下資訊：</h2>
+        <input type="number" id="age" placeholder="請輸入你的年齡">
+        <input type="text" id="gender" placeholder="請輸入你的性別（男 / 女 / 其他）">
+        <img src="images/去背_魔法寶箱02.png" class="treasure-btn" onclick="showResult()">
+      </div>
+    `;
   }
 }
 
+function limitCheck(checkbox) {
+  const checked = document.querySelectorAll('input[name="opt"]:checked');
+  if (checked.length > 5) {
+    checkbox.checked = false;
+    alert("最多只能選 5 項喔！");
+  }
+}
+
+function handleNext() {
+  const selected = Array.from(document.querySelectorAll('input[name="opt"]:checked')).map(c => c.value);
+  if (selected.length < 1 || selected.length > 5) {
+    alert("請選擇最少1項，最多5項！");
+    return;
+  }
+
+  // 統計分數
+  selected.forEach(letter => {
+    if (letter !== "H") scores[letter]++;
+  });
+
+  currentPage++;
+  renderPage();
+}
+
 function showResult() {
-  document.getElementById('quiz-container').classList.add('hidden');
-  document.getElementById('result-container').classList.remove('hidden');
-  document.getElementById('result-container').innerHTML = `
-    <h2>✨恭喜你完成了情緒魔法寶庫探索✨</h2>
-    <p>你的情緒魔法屬性是：「智慧轉念系＋活力行動系」（範例展示）</p>
-    <p>🎀別忘了寫下你的感受，或給守護者回信喔！</p>
+  const age = document.getElementById("age").value;
+  const gender = document.getElementById("gender").value;
+  if (!age || !gender) {
+    alert("請填寫年齡與性別");
+    return;
+  }
+
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  const topTwo = sorted.slice(0, 2).map(([key]) => key);
+
+  const container = document.getElementById("quiz-container");
+  container.innerHTML = `
+    <div class="result-box">
+      <h2>✨測驗完成！</h2>
+      <p>你的年齡：${age}</p>
+      <p>你的性別：${gender}</p>
+      <p>你的情緒魔法屬性是：<strong>${topTwo.join("＋")}</strong></p>
+      <p>🎀歡迎在頁尾留下你的心得回饋！</p>
+    </div>
   `;
 }
