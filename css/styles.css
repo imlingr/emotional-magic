@@ -1,165 +1,113 @@
-/* Reset & base styles */
-body {
-  font-family: "Noto Sans TC", sans-serif;
-  background-color: #fefaf3;
+body, html {
   margin: 0;
   padding: 0;
-  color: #333;
-}
-
-.hidden {
-  display: none;
-}
-
-/* Hero Section */
-.hero-section {
-  background-image: url("../images/首頁背景含人物_大圖.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  padding: 4rem 1rem;
-  text-align: center;
-}
-
-.scroll-content {
-  background-color: rgba(255, 255, 255, 0.85);
-  border-radius: 20px;
-  padding: 2rem;
-  margin: 3rem auto;
-  max-width: 800px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-.highlight {
-  color: #f47b20;
-  font-weight: bold;
-}
-
-button {
-  padding: 0.8rem 1.5rem;
-  background-color: #ffd966;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #f4c542;
-}
-
-/* Quiz Section */
-#quiz-section {
-  padding: 2rem 1rem;
-}
-
-.quiz-banner {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto 2rem auto;
-}
-
-#quiz-container {
-  max-width: 800px;
-  margin: 0 auto;
-  background-color: #fff8e1;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-#quiz-container h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.option-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-}
-
-.option-item input[type="checkbox"] {
-  margin-right: 12px;
-  transform: scale(1.2);
-  cursor: pointer;
-}
-
-/* Result Section */
-#result-container {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background-color: #fff5f8;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  text-align: center;
-}
-
-#result-container h2 {
-  color: #e76f51;
-  font-size: 1.8rem;
-}
-
-#result-container p {
-  font-size: 1.1rem;
-  margin-top: 1rem;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .scroll-content,
-  #quiz-container,
-  #result-container {
-    padding: 1rem;
-  }
-
-  h1 {
-    font-size: 1.5rem;
-  }
-
-  button {
-    font-size: 0.9rem;
-  }
-
-  .option-item {
-    font-size: 1rem;
-  }
-}
-/* 首頁圖全螢幕 */
-.full-cover {
-  width: 100%;
-  height: auto;
-  display: block;
-  cursor: pointer;
+  font-family: "Noto Sans TC", sans-serif;
+  background-color: #fdfaf2;
+  box-sizing: border-box;
 }
 
 .homepage {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   overflow: hidden;
 }
 
-/* 題目橫幅圖 */
+.full-cover {
+  width: 100vw;
+  height: auto;
+  display: block;
+  cursor: pointer;
+}
 .quiz-banner {
   width: 80%;
-  margin: 2rem auto;
   display: block;
+  margin: 0 auto;
+  padding-top: 0;
+}
+.progress-bar {
+  width: 80%;
+  margin: 1rem auto;
+  height: 24px;
+  position: relative;
 }
 
-/* 複選提示小字 */
-.note {
-  color: #888;
-  font-size: 1rem;
-  font-weight: normal;
-  margin-left: 0.5rem;
+.progress-track {
+  background-color: #e0cda6;
+  height: 6px;
+  border-radius: 4px;
 }
+
+.progress-icon {
+  width: 28px;
+  position: absolute;
+  top: -12px;
+  left: 0;
+  transition: left 0.4s ease;
+}
+#quiz-container {
+  width: 80%;
+  margin: 1rem auto;
+  background-color: #fff7e8;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.note {
+  display: block;
+  font-size: 1rem;
+  color: #888;
+  margin-bottom: 1.5rem;
+  margin-left: 0;
+}
+.option-item {
+  display: block;
+  margin: 0.8rem 0;
+  font-size: 1.2rem;
+}
+
+input[type=checkbox] {
+  margin-right: 0.6rem;
+}
+button {
+  margin-top: 2rem;
+  display: block;
+  padding: 0.6rem 1.5rem;
+  background-color: #f4c644;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+}
+.result-box,
+.question-box {
+  text-align: center;
+}
+
+.result-box h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+input[type=text], input[type=number] {
+  width: 60%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin: 1rem 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+.treasure-btn {
+  display: block;
+  width: 90px;
+  margin: 1rem auto;
+  cursor: pointer;
+}
+
