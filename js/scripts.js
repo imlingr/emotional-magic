@@ -4,7 +4,22 @@ const scores = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0 };
 const choices = "ABCDEFGH";
 
 const questions = Array(13).fill("😮 當你心情不好時，你通常會做些什麼呢？");
-const optionsPerPage = [...]; // ← ← ← 貼上你 13 頁的選項陣列
+
+const optionsPerPage = [
+  ["🌬️ 深呼吸 / 從1數到10","🍰 吃喜歡的食物","😷 表達身體不舒服","⏸️ 休息一下 / 暫停一下","🎧 聆聽他人的建議","🤐 不說出自己的想法和感受","🛌 什麼都不做 / 一直睡（擺爛）","✖️以上的方式我都很少用"],
+  ["🤔 覺察自己是否受非理性想法影響","🎨 做喜歡的事","😢 哭泣 / 流淚","🕰 等一下再說（冷靜後再處理）","🤔 請教他人怎麼做","🙈 隱藏自己的感受","📱 一直一直打遊戲或滑手機 / 作息大亂","✖️以上的方式我都很少用"],
+  ["🌷 把注意力放在美好的事物上","💆 捏捏抒壓小物","😭 大哭","🛋️ 找個舒服的地方放鬆一會兒","🗨️ 把心情說出來","😏 假裝不在乎","🚪 把自己一直關在房間","✖️以上的方式我都很少用"],
+  ["😄 用幽默看待問題","🎤 唱歌","😡 在心中咒罵對方","🚿 洗個熱水澡","🙏 禱告 / 拜拜 / 祈請靈性力量協助","😓 覺得自己很倒楣","🍔 暴飲暴食 / 不吃不喝","✖️以上的方式我都很少用"],
+  ["🧘 練習正念或冥想","🎸 彈奏樂器","💥 在心中想像痛揍對方","💤 好好睡一覺","🐶 跟寵物玩","💭 忍不住一直想一直想","🛒 瘋狂購物","✖️以上的方式我都很少用"],
+  ["😂 想好笑的事情","🎨 藝術創作（畫畫等）","🖍️ 亂塗亂畫","🕹️ 玩遊戲（計時小玩一下）","🤗 來一個擁抱","🤦 自責懊惱","🏍️ 超速騎車 / 飆車","✖️以上的方式我都很少用"],
+  ["🔄 轉念~轉動想法聚光燈","✍️ 創作（寫文、寫詩、寫歌…）","✂️ 撕紙或剪紙","🎬 看搞笑影片","💬 找好朋友聊一聊","😡 對自己生氣","🚫 做出傷害自己的行為","✖️以上的方式我都很少用"],
+  ["🤝 站在對方的立場想一想","🧹 整理東西或房間","⛺️ 打枕頭或打玩偶","🧵 專心做手作","👫 找信任或喜歡的親友陪伴自己","⏰ 之後再說（拖延或逃避）","🙅‍♀️ 不讀不回 / 不想溝通 / 冷戰","✖️以上的方式我都很少用"],
+  ["💪 對自己說鼓勵或安慰的話","🧽 大掃除或斷捨離","📝 在紙上寫滿三字經","🚶 一個人出去走一走","🚶‍♂️ 與親友到戶外走走","🙇‍♂️ 我就是爛","🗨️ 發限動抱怨或罵對方","✖️以上的方式我都很少用"],
+  ["📓 寫日記","🏃 運動 / 跳舞 / 伸展","😱 找個地方大叫","🗣️ 告知他人自己需要獨處靜一靜","👨‍👩‍👦 向爸媽或照顧者傾訴","🙅 拒絕別人的幫忙","🚮 丟 / 摔 / 打 / 踢東西宣洩","✖️以上的方式我都很少用"],
+  ["📚 閱讀","👍 做好事","😤 告訴對方自己很不爽 / 生氣了","🕰️ 默默等待親友來關心","👨‍🏫 尋求老師或大人的幫助","🙅‍♂️ 認為對方應該看出來自己心情不好","🔨 破壞東西","✖️以上的方式我都很少用"],
+  ["📝 把想法及心情寫下來","💼 更努力去做 / 去學","✊ 握拳 / 瞪人","📵 暫時關掉手機","👩‍⚕️ 找專業的人幫忙（看醫生、服藥）","😒 認為別人不會了解自己的痛苦","🗣️ 罵人 / 嗆聲","✖️以上的方式我都很少用"],
+  ["🔍 尋找解決或改善問題的方法","🦸‍♀️ 正面對決（面對它、處理它）","🚪 甩門離開","🤝 退出吵架中的群組","🧑‍⚕️ 找專業的人幫忙（專輔老師 / 心理師 / 社工師…）","😠 覺得都是別人的錯 / 別人害的","👊 打人 / 教訓對方","✖️以上的方式我都很少用"]
+];
 
 function startQuiz() {
   document.querySelector(".homepage").classList.add("hidden");
@@ -17,10 +32,9 @@ function renderPage() {
   const container = document.getElementById("quiz-container");
   container.innerHTML = "";
 
-  // 清空橫幅圖與進度條（避免重複插入）
   document.querySelectorAll(".quiz-banner, .progress-bar").forEach(el => el.remove());
 
-  // 顯示合照圖與進度條（頁1～14）
+  // 顯示進度與橫幅圖
   if (currentPage < totalPages) {
     const banner = document.createElement("img");
     banner.src = "images/合照有景_大圖1.png";
@@ -35,13 +49,12 @@ function renderPage() {
     `;
     document.getElementById("quiz-section").insertBefore(progress, container);
 
-    // 進度圖移動
-    const progressIcon = progress.querySelector("#progress-icon");
-    const segment = (progress.offsetWidth - 28) / (totalPages - 1);
-    progressIcon.style.left = `${segment * currentPage}px`;
+    const icon = progress.querySelector("#progress-icon");
+    const width = progress.offsetWidth - 28;
+    icon.style.left = `${(currentPage / (totalPages - 1)) * width}px`;
   }
 
-  // 題目頁 1～13
+  // 題目頁
   if (currentPage < 13) {
     const wrapper = document.createElement("div");
     wrapper.className = "question-box";
@@ -54,47 +67,49 @@ function renderPage() {
     optionsPerPage[currentPage].forEach((text, i) => {
       const label = document.createElement("label");
       label.className = "option-item";
-      label.innerHTML = `
-        <input type="checkbox" name="opt" value="${choices[i]}" onchange="limitCheck(this)"> ${text}
-      `;
+      label.innerHTML = `<input type="checkbox" name="opt" value="${choices[i]}" onchange="limitCheck(this)"> ${text}`;
       wrapper.appendChild(label);
     });
 
     const btn = document.createElement("button");
     btn.innerText = "下一頁";
-    btn.onclick = () => handleNext();
+    btn.onclick = handleNext;
     wrapper.appendChild(btn);
     container.appendChild(wrapper);
 
   } else if (currentPage === 13) {
-    // 第14頁：資訊頁
     container.innerHTML = `
       <div class="question-box">
-        <h2>📝 在揭曉結果前，請填寫以下資訊：</h2>
+        <h2>📝 請簡單填寫以下資訊：</h2>
         <input type="number" id="age" placeholder="請輸入你的年齡">
-        <input type="text" id="gender" placeholder="請輸入你的性別（男 / 女 / 其他）">
-        <img src="images/去背_魔法寶箱02.png" class="treasure-btn" onclick="showResult()" />
+        <div>
+          <label><input type="radio" name="gender" value="男"> 男</label>
+          <label><input type="radio" name="gender" value="女"> 女</label>
+          <label><input type="radio" name="gender" value="其他"> 其他 <input type="text" placeholder="補充說明"></label>
+        </div>
+        <img src="images/去背_魔法寶箱02.png" class="treasure-btn" onclick="showResult()">
       </div>
     `;
   }
 }
 
 function limitCheck(checkbox) {
-  const checked = document.querySelectorAll('input[name="opt"]:checked');
+  const checked = document.querySelectorAll('input[name=\"opt\"]:checked');
   if (checked.length > 5) {
     checkbox.checked = false;
-    alert("最多只能選 5 項喔！");
+    alert(\"最多只能選 5 項喔！\");
   }
 }
 
 function handleNext() {
-  const selected = Array.from(document.querySelectorAll('input[name="opt"]:checked')).map(c => c.value);
+  const selected = Array.from(document.querySelectorAll('input[name=\"opt\"]:checked')).map(c => c.value);
   if (selected.length < 1 || selected.length > 5) {
-    alert("請選擇最少1項，最多5項！");
+    alert(\"請選擇最少1項，最多5項！\");
     return;
   }
+
   selected.forEach(letter => {
-    if (letter !== "H") scores[letter]++;
+    if (letter !== \"H\") scores[letter]++;
   });
 
   currentPage++;
@@ -102,24 +117,24 @@ function handleNext() {
 }
 
 function showResult() {
-  const age = document.getElementById("age").value;
-  const gender = document.getElementById("gender").value;
+  const age = document.getElementById(\"age\").value;
+  const gender = document.querySelector('input[name=\"gender\"]:checked')?.value;
   if (!age || !gender) {
-    alert("請填寫年齡與性別");
+    alert(\"請填寫年齡與性別\");
     return;
   }
 
   const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
   const topTwo = sorted.slice(0, 2).map(([key]) => key);
 
-  const container = document.getElementById("quiz-container");
+  const container = document.getElementById(\"quiz-container\");
   container.innerHTML = `
-    <div class="result-box">
+    <div class=\"result-box\">
       <h2>✨測驗完成！</h2>
       <p>你的年齡：${age}</p>
       <p>你的性別：${gender}</p>
-      <p>你的情緒魔法屬性是：<strong>${topTwo.join("＋")}</strong></p>
-      <p>🎀歡迎在頁尾留下你的心得回饋！</p>
+      <p>你的情緒魔法屬性是：<strong>${topTwo.join(\"＋\")}</strong></p>
+      <p>🎀歡迎在頁尾留言分享你的感受！</p>
     </div>
   `;
 }
