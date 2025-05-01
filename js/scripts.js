@@ -180,3 +180,38 @@ function showResult() {
     }
   });
 }
+function 角色名稱(key) {
+  return {
+    A: "智慧轉念系魔法師",
+    B: "活力行動系魔法師",
+    C: "火山爆發系魔法師",
+    D: "潛水龜龜系魔法師",
+    E: "隊友召喚系魔法師",
+    F: "地獄思維系黑巫師",
+    G: "毀滅宇宙系黑巫師"
+  }[key] || "";
+}
+
+function 角色說明(key) {
+  return {
+    A: `<strong>智慧轉念系魔法師 ✨</strong><br>你擅長調整想法與觀點，能用正向思維消除黑暗情緒。請繼續保持你內在的明亮魔力吧！`,
+    B: `<strong>活力行動系魔法師 💪</strong><br>你的能量來自動起來的那一刻！無論運動、動手做，或轉移注意力，你總能靠行動來轉換情緒。`,
+    C: `<strong>火山爆發系魔法師 🌋</strong><br>你的情緒來得快又猛烈，宣洩對你來說很重要，也代表你真誠地表達內在狀態。學習適度表達，就能更進一步。`,
+    D: `<strong>潛水龜龜系魔法師 🐢</strong><br>你習慣獨處整理自己，也常常悶著不說。記得，有時分享情緒可以讓人感到更被理解。`,
+    E: `<strong>隊友召喚系魔法師 🤝</strong><br>你會在情緒時刻主動找人支持、尋求幫助。這是勇敢而智慧的表現，請記得，你不孤單。`,
+    F: `<strong>地獄思維系黑巫師 🔥</strong><br>你有時會陷入負面迴圈、自責與妄想受害。別忘了世界不一定敵對，停下想法，會看見一線曙光。`,
+    G: `<strong>毀滅宇宙系黑巫師 💥</strong><br>你可能用激烈或自傷方式來釋放情緒。別害怕面對情緒的源頭，學會溫柔待自己，也是強大的魔法。`
+  }[key] || "";
+}
+function submitToTally(age, gender, encodedScores) {
+  const message = document.getElementById("message").value;
+  const formURL = "https://tally.so/r/w82G0o";
+  const params = new URLSearchParams();
+
+  params.append("field:age", age);
+  params.append("field:gender", gender);
+  params.append("field:scores", decodeURIComponent(encodedScores));
+  params.append("field:message", message);
+
+  window.open(`${formURL}?${params.toString()}`, "_blank");
+}
