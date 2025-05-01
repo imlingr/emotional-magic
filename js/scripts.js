@@ -117,24 +117,66 @@ function handleNext() {
 }
 
 function showResult() {
-  const age = document.getElementById(\"age\").value;
-  const gender = document.querySelector('input[name=\"gender\"]:checked')?.value;
+  const age = document.getElementById("age")?.value || "";
+  const genderInput = document.querySelector('input[name="gender"]:checked');
+  const genderText = genderInput ? genderInput.value : "";
+  const otherText = genderInput?.value === "其他"
+    ? genderInput.parentElement.querySelector("input[type='text']").value
+    : "";
+  const gender = genderText === "其他" ? `其他：${otherText}` : genderText;
+
   if (!age || !gender) {
-    alert(\"請填寫年齡與性別\");
+    alert("請填寫年齡與性別");
     return;
   }
 
-  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  // 統計分數（1~5題為 1分，6~7為2分，H為0分）
+  const fullScores = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0 };
+  Object.entries(scores).forEach(([key, val]) => {
+    fullScores[key] = (["F", "G"].includes(key)) ? val * 2 : val;
+  });
+
+  // 排序取前2高
+  const sorted = Object.entries(fullScores).sort((a, b) => b[1] - a[1]);
   const topTwo = sorted.slice(0, 2).map(([key]) => key);
 
-  const container = document.getElementById(\"quiz-container\");
+  // 顯示雷達圖 + 結果卡
+  const container = document.getElementById("quiz-container");
   container.innerHTML = `
-    <div class=\"result-box\">
-      <h2>✨測驗完成！</h2>
-      <p>你的年齡：${age}</p>
-      <p>你的性別：${gender}</p>
-      <p>你的情緒魔法屬性是：<strong>${topTwo.join(\"＋\")}</strong></p>
-      <p>🎀歡迎在頁尾留言分享你的感受！</p>
+    <div class="result-box">
+      <h2>✨你的情緒魔法屬性分析✨</h2>
+      <canvas id="radarChart" width="300" height="300"></canvas>
+
+      <div class="cards">
+        ${topTwo.map(key => `
+          <div class="card-block">
+            <img src="images/人物卡${key}${角色名稱(key)}.png" class="result-card" />
+            <div class="desc-block">${角色說明(key)}</div>
+          </div>
+        `).join("")}
+      </div>
+
+      <textarea id="message" placeholder="🔮簡單說說你的感想，魔法寶庫守護者會認真看哦！（可選填）"></textarea>
+      <button onclick="submitToTally('${age}', '${gender}', '${encodeURIComponent(JSON.stringify(fullScores))}')">送出我的魔法結果 ✨</button>
     </div>
   `;
+
+  // 畫圖
+  const ctx = document.getElementById('radarChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: ["A", "B", "C", "D", "E", "F", "G"],
+      datasets: [{
+        label: '屬性分數',
+        data: ["A", "B", "C", "D", "E", "F", "G"].map(k => fullScores[k]),
+        backgroundColor: "rgba(255, 193, 7, 0.2)",
+        borderColor: "#f4b400",
+        borderWidth: 2
+      }]
+    },
+    options: {
+      scales: { r: { beginAtZero: true, max: 10 } }
+    }
+  });
 }
