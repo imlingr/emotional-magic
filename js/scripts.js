@@ -1,15 +1,3 @@
-function startQuiz() {
-  const homepage = document.querySelector(".homepage");
-  const quizSection = document.getElementById("quiz-section");
-
-  if (homepage && quizSection) {
-    homepage.classList.add("hidden");
-    quizSection.classList.remove("hidden");
-    currentPage = 0;
-    renderPage(); // 載入第一頁題目
-  }
-}
-
 let currentPage = 0;
 const totalPages = 14;
 const scores = { A: 0, B: 0, C: 0, D: 0, E: 0, F: 0, G: 0 };
@@ -34,10 +22,15 @@ const optionsPerPage = [
 ];
 
 function startQuiz() {
-  document.querySelector(".homepage").classList.add("hidden");
-  document.getElementById("quiz-section").classList.remove("hidden");
-  currentPage = 0;
-  renderPage();
+  const homepage = document.querySelector(".homepage");
+  const quizSection = document.getElementById("quiz-section");
+
+  if (homepage && quizSection) {
+    homepage.classList.add("hidden");
+    quizSection.classList.remove("hidden");
+    currentPage = 0;
+    renderPage(); // 載入第一頁題目
+  }
 }
 
 function renderPage() {
