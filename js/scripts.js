@@ -220,3 +220,12 @@ function submitToTally(age, gender, encodedScores) {
 
   window.open(`${formURL}?${params.toString()}`, "_blank");
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const homepage = document.querySelector(".homepage");
+  if (homepage) {
+    const opts = { once: true };
+    homepage.addEventListener("wheel", () => startQuiz(), opts);
+    homepage.addEventListener("touchmove", () => startQuiz(), opts);
+  }
+});

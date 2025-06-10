@@ -113,3 +113,7 @@ input[type=text], input[type=number] {
   cursor: pointer;
 }
 
+.hidden {
+  display: none;
+}
+
